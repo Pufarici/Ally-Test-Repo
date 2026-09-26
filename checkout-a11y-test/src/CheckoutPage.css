@@ -1,0 +1,463 @@
+/* =========================================================
+   Global resets & base
+   ========================================================= */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  background: #f0f2f5;
+  color: #1f2328;
+}
+
+a {
+  color: #3b82d4;
+  text-decoration: underline;
+}
+
+/* =========================================================
+   Promotional banner (auto-playing carousel — Violation 8)
+   No pause/stop control is rendered alongside this element.
+   ========================================================= */
+.promo-banner {
+  width: 100%;
+  padding: 10px 20px;
+  text-align: center;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.4s ease;
+}
+
+/* =========================================================
+   Header
+   ========================================================= */
+.checkout-header {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.checkout-logo {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: #1f2328;
+}
+
+.checkout-title {
+  font-size: 18px;
+  font-weight: 500;
+  color: #57606a;
+}
+
+/* =========================================================
+   Layout
+   ========================================================= */
+.checkout-root {
+  min-height: 100vh;
+}
+
+.checkout-main {
+  max-width: 1080px;
+  margin: 32px auto;
+  padding: 0 24px 48px;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 720px) {
+  .checkout-main {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+   Sections
+   ========================================================= */
+.checkout-section {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.section-heading {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2328;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* =========================================================
+   Product list
+   ========================================================= */
+.product-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.product-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  position: relative;
+}
+
+.product-thumb {
+  width: 64px;
+  height: 64px;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.product-details {
+  flex: 1;
+}
+
+.product-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f2328;
+  line-height: 1.4;
+}
+
+.product-meta {
+  font-size: 13px;
+  color: #57606a;
+  margin-top: 2px;
+}
+
+.product-price {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f2328;
+  margin-top: 4px;
+}
+
+/* =========================================================
+   Discount badge  (Violation 10 — flashes > 3×/sec)
+   ========================================================= */
+@keyframes badge-flash {
+  0%,  100% { opacity: 1; }
+  50%        { opacity: 0; }
+}
+
+.discount-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #e63946;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  animation: badge-flash 0.28s step-start infinite;
+}
+
+/* =========================================================
+   Promo code
+   ========================================================= */
+.promo-row {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.promo-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: #1f2328;
+  margin-bottom: 6px;
+}
+
+.promo-input-group {
+  display: flex;
+  gap: 8px;
+}
+
+.promo-input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #1f2328;
+  outline: none;
+}
+
+.promo-input:focus {
+  border-color: #3b82d4;
+  box-shadow: 0 0 0 3px rgba(59, 130, 212, 0.15);
+}
+
+/* Violation 2 — clickable <span>, no tabindex/role */
+.promo-apply-btn {
+  padding: 8px 16px;
+  background: #1f2328;
+  color: #ffffff;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* Violation 7 — green color only for success state */
+.promo-success {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #16a34a;
+}
+
+/* Violation 6 — red color only for error state */
+.promo-error {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #dc2626;
+}
+
+/* =========================================================
+   Order totals
+   ========================================================= */
+.order-totals {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #57606a;
+}
+
+.total-final {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1f2328;
+  padding-top: 8px;
+  border-top: 1px solid #e5e7eb;
+  margin-top: 4px;
+}
+
+/* =========================================================
+   Shipping form
+   ========================================================= */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 14px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.form-input {
+  padding: 9px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #1f2328;
+  outline: none;
+  width: 100%;
+}
+
+.form-input:focus {
+  border-color: #3b82d4;
+  box-shadow: 0 0 0 3px rgba(59, 130, 212, 0.15);
+}
+
+.input-error {
+  border-color: #dc2626;
+}
+
+/* Violation 6 (field-level) — red color only for field errors */
+.field-error {
+  font-size: 12px;
+  color: #dc2626;
+}
+
+.form-row {
+  display: grid;
+  gap: 12px;
+}
+
+.form-row-2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.form-row-3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+/* =========================================================
+   Save-address custom checkbox  (Violation 3)
+   <div> with no role="checkbox" or aria-checked
+   ========================================================= */
+.save-address-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.custom-checkbox {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #d1d5db;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: #ffffff;
+}
+
+.custom-checkbox-checked {
+  background: #3b82d4;
+  border-color: #3b82d4;
+  color: #ffffff;
+}
+
+.checkmark {
+  font-size: 12px;
+  line-height: 1;
+}
+
+.save-address-label {
+  font-size: 14px;
+  color: #1f2328;
+  cursor: pointer;
+}
+
+/* Violation 5 — light gray (#cccccc) on white: fails 4.5:1 contrast */
+.helper-text {
+  font-size: 12px;
+  color: #cccccc;
+  margin-bottom: 0;
+}
+
+/* =========================================================
+   Payment
+   ========================================================= */
+.payment-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.payment-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #1f2328;
+  cursor: pointer;
+}
+
+.payment-option input[type="radio"] {
+  accent-color: #3b82d4;
+  width: 16px;
+  height: 16px;
+}
+
+.card-fields {
+  padding-top: 4px;
+}
+
+.payment-info {
+  font-size: 14px;
+  color: #57606a;
+  padding: 10px 0;
+}
+
+/* =========================================================
+   Place Order button  (Violation 1 — <div onClick>, no role/tabindex)
+   Violation 9 — hover slide transition not in prefers-reduced-motion
+   ========================================================= */
+.place-order-btn {
+  display: block;
+  width: 100%;
+  padding: 15px 24px;
+  background: #1d4ed8;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 8px;
+  margin-bottom: 16px;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.place-order-btn:hover {
+  background: #1e40af;
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   Checkout legal
+   ========================================================= */
+.checkout-legal {
+  font-size: 12px;
+  color: #57606a;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   Order confirmation
+   ========================================================= */
+.order-confirmation {
+  max-width: 480px;
+  margin: 80px auto;
+  text-align: center;
+  padding: 40px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+}
+
+.order-confirmation h1 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1f2328;
+  margin-bottom: 12px;
+}
+
+.order-confirmation p {
+  font-size: 15px;
+  color: #57606a;
+}
